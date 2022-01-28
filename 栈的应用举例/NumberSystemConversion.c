@@ -1,6 +1,6 @@
 /*
- *1.ÊýÖÆ×ª»»£ºÀûÓÃÕ»½«Êý×Ö×ª»»½øÖÆºóµÃµ½µÄÊý×ÖÑ¹Õ»£¬Ö®ºóÔÚ³öÕ»¡£ nÎªÒª×ª»»µÄÊý×Ö£¬NÎª½øÖÆ
- ÒÔÊ®½øÖÆ×ª»»Îª°Ë½øÖÆÎªÀý¡£
+ *æ•°åˆ¶è½¬æ¢ï¼šåˆ©ç”¨æ ˆå°†æ•°å­—è½¬æ¢è¿›åˆ¶åŽå¾—åˆ°çš„æ•°å­—åŽ‹æ ˆï¼Œä¹‹åŽåœ¨å‡ºæ ˆã€‚ nä¸ºè¦è½¬æ¢çš„æ•°å­—ï¼ŒNä¸ºè¿›åˆ¶
+ *ä»¥åè¿›åˆ¶è½¬æ¢ä¸ºå…«è¿›åˆ¶ä¸ºä¾‹ã€‚
  */
 #include<stdio.h>
 #include<malloc.h>
@@ -82,7 +82,7 @@ int main()
 {
     PS ps = NULL;
     ps = initStack(ps);
-    printf("ÇëÊäÈëÄãÏëÒª×ª»»µÄÊ®½øÖÆÊý:");
+    printf("è¯·è¾“å…¥ä½ æƒ³è¦è½¬æ¢çš„åè¿›åˆ¶æ•°:");
     int n;
     scanf("%u",&n);
     while (n)
@@ -90,7 +90,7 @@ int main()
         push(ps,n%N);
         n /= N;
     }
-    printf("×ª»»ºóµÄÊý×ÖÎª:");
+    printf("è½¬æ¢åŽçš„æ•°å­—ä¸º:");
     while(!isEmpty(ps))
     {
         Elemtype e = pop(ps);
@@ -101,8 +101,8 @@ int main()
     return 0;
 }
 /**
- * Ë¼¿¼ÈôÊÇ×ª»»Îª16»úÖÆÄØ£¿
- * ÕâÊÇÔÚpopµÄÊ±ºò¼ÓÉÏÅÐ¶ÏÌõ¼þÈÃÆä¿ÉÒÔ×ª±äÎª×ÖÄ¸¡£
+ * æ€è€ƒè‹¥æ˜¯è½¬æ¢ä¸º16æœºåˆ¶å‘¢ï¼Ÿ
+ * è¿™æ˜¯åœ¨popçš„æ—¶å€™åŠ ä¸Šåˆ¤æ–­æ¡ä»¶è®©å…¶å¯ä»¥è½¬å˜ä¸ºå­—æ¯ã€‚
  *  while(!isEmpty(ps))
     {
         Elemtype e = pop(ps);
