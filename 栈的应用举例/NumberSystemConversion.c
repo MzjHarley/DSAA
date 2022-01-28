@@ -16,6 +16,49 @@ typedef struct Stack
     Elemtype * ptop;
     int stackSize;
 }S,*PS;
+PS destroyStack(PS ps);
+PS initStack(PS ps);
+bool isEmpty(PS ps);
+void push(PS ps,int val);
+Elemtype pop(PS ps);
+int main()
+{
+    PS ps = NULL;
+    ps = initStack(ps);
+    printf("请输入你想要转换的十进制数:");
+    int n;
+    scanf("%u",&n);
+    while (n)
+    {
+        push(ps,n%N);
+        n /= N;
+    }
+    printf("转换后的数字为:");
+    while(!isEmpty(ps))
+    {
+        Elemtype e = pop(ps);
+        printf("%d",e);
+    }
+    printf("\n");
+    ps = destroyStack(ps);
+    return 0;
+}
+/**
+ * 思考若是转换为16机制呢？
+ * 这是在pop的时候加上判断条件让其可以转变为字母。
+ while(!isEmpty(ps))
+ {
+    Elemtype e = pop(ps);
+    if(e<10)
+    {
+        printf("%d",e);
+    }
+    else
+    {
+        printf("%c",e+55);
+    }
+ }
+ */
 PS destroyStack(PS ps)
 {
     free(ps->pbase);
@@ -78,41 +121,3 @@ Elemtype pop(PS ps)
     ps->ptop--;
     return *(ps->ptop);
 }
-int main()
-{
-    PS ps = NULL;
-    ps = initStack(ps);
-    printf("请输入你想要转换的十进制数:");
-    int n;
-    scanf("%u",&n);
-    while (n)
-    {
-        push(ps,n%N);
-        n /= N;
-    }
-    printf("转换后的数字为:");
-    while(!isEmpty(ps))
-    {
-        Elemtype e = pop(ps);
-        printf("%d",e);
-    }
-    printf("\n");
-    ps = destroyStack(ps);
-    return 0;
-}
-/**
- * 思考若是转换为16机制呢？
- * 这是在pop的时候加上判断条件让其可以转变为字母。
- *  while(!isEmpty(ps))
-    {
-        Elemtype e = pop(ps);
-        if(e<10)
-        {
-            printf("%d",e);
-        }
-        else
-        {
-            printf("%c",e+55);
-        }
-    }
- */
