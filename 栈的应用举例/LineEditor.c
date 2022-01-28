@@ -29,11 +29,16 @@ void LineEdit()
     PS ps = NULL;
     char ch;
     ps = initStack(ps);//初始化栈
-    ch = getchar();//从控制台接收字符；
-    //单独一行ctrl+Z结束
-    while(ch != EOF)//EOF为ctrl+Z键，全文未结束时，行首字符不能ctrl+Z
+    ch = getchar();
+    //如果stdin有数据的话此时getcahr不用输入就可以直接读取。
+    //如果没有数据的话，getchar()用户输入的字符被存放在键盘缓冲区中。直到用户按回车为止（回车字符也放在缓冲区中）,此时只能读不能写入到缓冲区中。
+    //当用户键入回车之后，getchar才开始从stdin流中每次读入一个字符。
+    //getchar函数的返回值是用户输入的字符的ASCII码，若读至文件结尾(End-Of-File)则返回-1(EOF)，且将用户输入的字符回显到屏幕。
+    //如果^Z字符跟着普通的数据后面，它就被当成字符读入，存储为ascall码对应的字符，同时也会暴露出一个问题，就是换行符会被吸收，从而导致换行符无法写入到键盘缓冲区。
+    //如果是单独一个^Z或者^Z后面跟字符系统就会识别出它是文件结束标识符，读的就是EOF，这个宏定义的字符。所以就返回-1了
+    while(ch != EOF)//EOF为ctrl+Z键，全文未结束时
     {
-        while(ch!=EOF && ch!='\n') //未到行末时
+        while(ch!=EOF && ch!='\n') //全文未结束且未到行末时
         {
             switch(ch)
             {
@@ -49,7 +54,7 @@ void LineEdit()
                 default:
                     push(ps,ch);
             }
-            ch = getchar();
+            ch = getchar();//这里是一个关键点
         }
         //压栈完成后将栈中的字符写入文件并写入换行符
         char * p = ps->pbase;
@@ -69,7 +74,7 @@ void LineEdit()
 }
 int main()
 {
-    fp = fopen("test.txt","w");//以“写入”方式打开文件。如果文件不存在，那么创建一个新文件；如果文件存在，那么清空文件内容（相当于删除原文件，再创建一个新文件）。
+    fp = fopen("test.txt","w");//以“写入”方式打开文件。如果文件不存在，那么在当前目录创建一个新文件；如果文件存在，那么清空文件内容（相当于删除原文件，再创建一个新文件）。
     if(fp)  //fp不为NULL
     {
         LineEdit();//编辑文件
