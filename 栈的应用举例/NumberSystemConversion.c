@@ -19,7 +19,7 @@ typedef struct Stack
 PS destroyStack(PS ps);
 PS initStack(PS ps);
 bool isEmpty(PS ps);
-void push(PS ps,int val);
+void push(PS ps,Elemtype val);
 Elemtype pop(PS ps);
 int main()
 {
@@ -101,7 +101,7 @@ bool isEmpty(PS ps)
         return false;
     }
 }
-void push(PS ps,int val)
+void push(PS ps,Elemtype val)
 {
     if((ps->ptop - ps->pbase) == ps->stackSize)
     {
