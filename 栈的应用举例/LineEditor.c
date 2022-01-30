@@ -137,7 +137,8 @@ void push(PS ps,Elemtype val)
             printf("Dynamic malloc failed.\n");
             exit(-1);
         }
-        ps->ptop = (ps->ptop - ps->pbase) + ps->pbase;
+        ps->ptop = ps->stackSize + ps->pbase;
+        ps->stackSize += INCREASE;
     }
     *(ps->ptop) = val;
     ps->ptop++;
