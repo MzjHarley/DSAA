@@ -137,7 +137,7 @@ bool MazePath(PosType entrance,PosType exit)
             m[curPos.x][curPos.y] = curStep;
             e.ord = curStep;//栈元素的序号为当前足迹
             e.pos = curPos;//栈元素的位置为当前位置
-            e.di = 0;//从东开始，故下一位置为东
+            e.di = 0;//从东开始，故下一位置的方向为东
             push(ps,e);
             if(curPos.x==exit.x && curPos.y==exit.y)//若到达终点
                 return true;
@@ -147,7 +147,7 @@ bool MazePath(PosType entrance,PosType exit)
             curPos.x += dire[e.di].x;
             curPos.y += dire[e.di].y;
         }
-        else//如果当前位置不能通过，则回溯到前一位置，改变e.di，到下一位置，再进行判断。如果所有方向得到的下一个位置都不可通过，标记当前位置为-1再进行回溯
+        else//如果当前位置不能通过，则回溯到前一位置，改变e.di，到下一位置，再进行判断。如果所有方向得到的下一个位置都不可通过，标记当前位置为-1，再进行回溯
         {
             if(!isEmpty(ps))
             {
