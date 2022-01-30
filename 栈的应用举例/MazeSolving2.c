@@ -8,7 +8,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+
 FILE*fp;//设置一个存放数剧的文件。
+
 #define MAXSIZE 25 //设立迷宫最大长度为25
 typedef int MazeType[MAXSIZE][MAXSIZE]; //设立迷宫数据类型MazeType，其本质为二维数组
 MazeType m;//设立迷宫数据类型的一个全局变量
