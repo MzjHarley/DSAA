@@ -118,7 +118,6 @@ PS initStack(PS ps);
 bool isEmpty(PS ps);
 void push(PS ps,ElemType val);
 ElemType pop(PS ps);
-void clearStack(PS ps);
 
 /**
  * 寻找按照我们规定顺序的从入口到出口的路径。
@@ -171,6 +170,7 @@ bool MazePath(PosType entrance,PosType exit)
             }
         }
     } while (!isEmpty(ps));
+    ps = destroyStack(ps);
     return false;
 }
 
@@ -254,8 +254,4 @@ ElemType pop(PS ps)
 {
     ps->ptop--;
     return *(ps->ptop);
-}
-void clearStack(PS ps)
-{
-    ps->ptop = ps->pbase;
 }
