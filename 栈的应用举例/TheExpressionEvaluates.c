@@ -11,8 +11,116 @@
   */
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
+#define INIT_STACK_SIZE 10
+#define INCREASE 2
 
+typedef char Elemtype;
+typedef struct Stack
+{
+    Elemtype * pbase;
+    Elemtype * ptop;
+    int stackSize;
+}S,*PS;
+PS destroyStack(PS ps);
+PS initStack(PS ps);
+bool isEmpty(PS ps);
+void push(PS ps,Elemtype val);
+Elemtype pop(PS ps);
+
+bool In(Elemtype c)//判断c是否是七种运算符之一
+{
+  if(c=='+' || c=='-' || c=='*' || c=='/' || c=='(' || c==')' || c=='\n')
+    return true;
+  else
+    return false;
+}
+/**
+ * 比较t1和t2运算符的优先级。
+ * @param t1 为运算符栈顶的运算符
+ * @param t2 为新读取的运算符
+ */
+Elemtype precede(Elemtype t1, Elemtype t2)
+{
+  if(t2=='+' || t2=='-')
+  {
+    
+  }
+}
+
+Elemtype EvaluateExpression()
+{
+  PS OPTR,OPND;//创建两个栈：运算符栈（存放运算符）和数字栈（存放数字）
+  Elemtype a, b, c, d;
+  OPTR = initStack(OPTR);
+  OPND = initStack(OPND);
+
+}
 int main()
 {
+
     return 0;
+}
+PS destroyStack(PS ps)
+{
+    free(ps->pbase);
+    free(ps);
+    return NULL;
+}
+PS initStack(PS ps)
+{
+    if(ps)
+    {
+        ps = destroyStack(ps);
+    }
+    ps = (PS)malloc(sizeof(S));
+    if(NULL == ps)
+    {
+        printf("Dynamic malloc failed.\n");
+        exit(-1);
+    }
+    else
+    {
+        ps->pbase = (Elemtype*)malloc(sizeof(Elemtype)*INIT_STACK_SIZE);
+        if(NULL == ps->pbase)
+        {
+            printf("Dynamic malloc failed.\n");
+            exit(-1);
+        }
+        ps->ptop = ps->pbase;
+        ps->stackSize = INIT_STACK_SIZE;
+    }
+    return ps;
+}
+bool isEmpty(PS ps)
+{
+    if(ps->pbase == ps->ptop)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+void push(PS ps,Elemtype val)
+{
+    if((ps->ptop - ps->pbase) == ps->stackSize)
+    {
+        ps->pbase = (Elemtype*)realloc(ps->pbase, sizeof(Elemtype)*((ps->ptop - ps->pbase)+INCREASE));
+        if(NULL == ps->pbase)
+        {
+            printf("Dynamic malloc failed.\n");
+            exit(-1);
+        }
+        ps->ptop = ps->stackSize + ps->pbase;
+        ps->stackSize += INCREASE;
+    }
+    *(ps->ptop) = val;
+    ps->ptop++;
+}
+Elemtype pop(PS ps)
+{
+    ps->ptop--;
+    return *(ps->ptop);
 }
