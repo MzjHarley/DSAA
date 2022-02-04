@@ -175,7 +175,7 @@ Elemtype EvaluateExpression()
 int main()
 {
     printf("请输入算术表达式(输入值在0~9之间，中间运算值和输出结果在-128~127之间):\n");
-    printf("%d",EvaluateExpression());
+    printf("%d",EvaluateExpression());//测试例子:((5-3)*3+2)/(2+2)
     return 0;
 }
 PS destroyStack(PS ps)
