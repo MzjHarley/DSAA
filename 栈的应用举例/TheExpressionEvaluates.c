@@ -107,7 +107,8 @@ Elemtype Operate(Elemtype a,Elemtype theta,Elemtype b)
         case '-': return a-b;
         case '*': return a*b;
     }
-    if(b != ' ')
+    Elemtype t = (Elemtype)('0'-48);
+    if(b != t)
         return a/b;
     else
     {
