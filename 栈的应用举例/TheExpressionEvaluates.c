@@ -9,6 +9,7 @@
   * 2.将int类型赋值给char，是将其补码后八位对应的字符赋给char，比如char c = 48,结果为字符0，十进制输出为48。
   * 3.字符之间可以加减乘除，运算结果为整型（其十进制ASCII码加减乘除），例如'3'+'5' 结果为104=51+53
   * 4.'\n'运算符的优先级小于所有其他运算字符
+  * 5.先乘除后加减，先括号先算括号里面的
   */
 #include<stdio.h>
 #include<stdlib.h>
@@ -100,11 +101,11 @@ Elemtype precede(Elemtype t1, Elemtype t2)
  */
 Elemtype Operate(Elemtype a,Elemtype theta,Elemtype b)
 {
-    switch (theta)
+    switch (theta)            
     {
-    case '+': return a+b;
-    case '-': return a-b;
-    case '*': return a*b;
+        case '+': return a+b;
+        case '-': return a-b;
+        case '*': return a*b;
     }
     if(b != ' ')
         return a/b;
@@ -120,15 +121,60 @@ Elemtype Operate(Elemtype a,Elemtype theta,Elemtype b)
  */
 Elemtype EvaluateExpression()
 {
-  PS OPTR,OPND;//创建两个栈：运算符栈（存放运算符）和数字栈（存放数字）
-  Elemtype a, b, c, d;
-  OPTR = initStack(OPTR);
-  OPND = initStack(OPND);
-  
+    PS OPTR = NULL, OPND = NULL;//创建两个栈：运算符栈（存放运算符）和数字栈（存放数字）
+    OPTR = initStack(OPTR);
+    OPND = initStack(OPND);
+    Elemtype a, b, c, d;//定义临时变量，存放栈中的数据。
+    push(OPTR,'\n');//初始化运算符栈
+    c = getchar();//从控制台获取的字符
+    d = getTop(OPTR);//获取运算符栈顶的字符
+    while (c!='\n' || d!='\n')
+    {
+        if(In(c))//如果c是七种字符之一
+        {
+            switch (precede(d,c))
+            {
+                case '<': //栈顶字符优先级小，则将读取的字符压栈
+                        push(OPTR,c);
+                        c = getchar();
+                        break;
+                case '='://优先级相同，将栈顶字符出栈
+                        pop(OPTR);
+                        c = getchar();
+                        break;
+                case '>'://栈顶字符优先级大，则栈顶字符出栈作a d b运算并将运算结果压入到数字栈中
+                        d = pop(OPTR);
+                        b = pop(OPND);
+                        a = pop(OPND);
+                        push(OPND,Operate(a, d, b));
+            }
+            d = getTop(OPTR);
+        }
+        else if(c>='0' && c<='9')//如果是数字字符，则将数字字符对应的数字压入栈中。
+        {
+            push(OPND,c-48);
+            c = getchar();
+        }
+        else
+        {
+            printf("出现非法字符.\n");
+            exit(-1);
+        }
+    }
+    d = pop(OPND);
+    if(!isEmpty(OPND))
+    {
+        printf("表达式出错.\n");//such as 3+12,(5+2)(3+6)and so on.
+        exit(-1);
+    }
+    OPND = destroyStack(OPND);
+    OPTR = destroyStack(OPTR);
+    return d;
 }
 int main()
 {
-
+    printf("请输入算术表达式(输入值在0~9之间，中间运算值和输出结果在-128~127之间):\n");
+    printf("%d",EvaluateExpression());
     return 0;
 }
 PS destroyStack(PS ps)
@@ -196,5 +242,5 @@ Elemtype pop(PS ps)
 }
 Elemtype getTop(PS ps)
 {
-    return *(ps->ptop);
+    return *(ps->ptop-1);
 }
