@@ -1,7 +1,7 @@
 /**
- * ╤сапё╛р╩жжох╫ЬохЁЖ╣д╢Ф╢╒╫А╧╧║ё
- * нр╫╚й╣ожа╢й╫╤сап╣дкЫсп╦ъ╪╤╡ывВё╨
- * ЁУй╪╩╞,оЗ╩ы,гЕ©у,╣ц╣╫Ё╓╤х,еп╤ойг╥Ян╙©у,╣ц╣╫╤см╥т╙кь,хК╤с,ЁЖ╤с,╠ИюЗё╛╧╡9╦Ж╡ывВ
+ * И≤÷Е┬≈О╪▄Д╦─Г╖█Е┘┬Х©⌡Е┘┬Е┤╨Г └Е╜≤Е┌╗Г╩⌠Ф·└Ц─┌
+ * Ф┬▒Е╟├Е╝·Г▌╟И⌠╬Е╪▐И≤÷Е┬≈Г └Ф┴─Ф°┴И╚≤Г╨╖Ф⌠█Д╫°О╪ 
+ * Е┬²Е╖▀Е▄√,И■─Ф╞│,Ф╦┘Г╘╨,Е╬≈Е┬╟И∙©Е╨╕,Е┬╓Ф√╜Ф≤╞Е░╕Д╦╨Г╘╨,Е╬≈Е┬╟И≤÷Е╓╢Е┘┐Г╢═,Е┘╔И≤÷,Е┤╨И≤÷,И│█Е▌├О╪▄Е┘╠9Д╦╙Ф⌠█Д╫°
  */
 #include<stdio.h>
 #include<stdlib.h>
@@ -31,6 +31,118 @@ void TraverseQueue(PQ);
 
 int main()
 {
+    printf("******************\n");
+    printf("*1.initQueue     *\n");
+    printf("*2.EnQueue       *\n");
+    printf("*3.DeQueue       *\n");
+    printf("*4.clearQueue    *\n");
+    printf("*5.Empty Or Not  *\n");
+    printf("*6.printQueue    *\n");
+    printf("*7.destroyQueue  *\n");
+    printf("*8.getLength     *\n");
+    printf("*9.getHead       *\n");
+    printf("******************\n");
+    int num;
+    char str;
+    Elemtype val;
+    PQ q = NULL;
+    do
+    {
+        printf("Input Operand:");
+        scanf("%d",&num);
+        if(num>0 && num<10)
+        {
+            switch(num)
+            {
+                case 1:
+                    q = initQueue();
+                    break;
+                case 2:
+                    if(q)
+                    {
+                        printf("Х╞╥Х╬⌠Е┘╔Д╫═Х╕│Е┘╔И≤÷Г └Е┘┐Г╢═:");
+                        scanf("%d",&val);
+                        EnQueue(q, val);
+                    }
+                    else
+                    {
+                        printf("Queue is NULL.\n");
+                    }
+                    break;
+                case 3:
+                    if(!q)
+                    {
+                        printf("queue is NULL.\n");
+                    }
+                    else if(isEmpty(q))
+                    {
+                        printf("queue is empty.\n");
+                    }
+                    else
+                    {
+                        printf("Е┤╨И≤÷Г └Е┘┐Г╢═Д╦╨%d.\n",DeQueue(q));
+                    }
+                    break;
+                case 4:
+                    clearQueue(q);
+                    break;
+                case 5:
+                    if(!q)
+                    {
+                        printf("queue is NULL.\n");
+                    }
+                    else
+                    {
+                        if(isEmpty(q))
+                        {
+                            printf("Empty.\n");
+                        }
+                        else
+                        {
+                            printf("Not Empty.\n");
+                        }
+                    }
+                    break;
+                case 6:
+                    TraverseQueue(q);
+                    break;
+                case 7:
+                    q = destroyQueue(q);
+                    break;
+                case 8:
+                    if(!q)
+                    {
+                        printf("queue is NULL.\n");
+                    }
+                    else
+                    {
+                        printf("И∙©Е╨╕:%d.\n",getLength(q));
+                    }
+                    break;
+                case 9:
+                    if(!q)
+                    {
+                        printf("Queue is NULL.\n");
+                    }
+                    else if(isEmpty(q))
+                    {
+                        printf("Queue is Empty.\n");
+                    }
+                    else
+                    {
+                        printf("И≤÷Е╓╢Е┘┐Г╢═Д╦╨%d.\n",getHead(q));
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            printf("Error Operand.\n");
+        }
+        printf("Continue Or Not(Y/N):");
+        scanf(" %c",&str);
+    }
+    while(str == 'Y'|| str == 'y');
     return 0;
 }
 
@@ -84,8 +196,8 @@ void clearQueue(PQ q)
     }
     else
     {
-        q->front->next = destroyQueue(q->front->next);
-        q->rear = q->front;
+        destroyQueue(q);
+        q = initQueue();
     }
 }
 int getLength(PQ q)
@@ -115,7 +227,6 @@ void EnQueue(PQ q,Elemtype val)
     if(!q)
     {
         printf("Arguments is NULL.\n");
-        return false;
     }
     else
     {
@@ -132,7 +243,6 @@ void EnQueue(PQ q,Elemtype val)
         }
         q->rear->next = p;
         q->rear = p;
-        return true;
     }
 }
 Elemtype DeQueue(PQ q)
