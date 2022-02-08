@@ -1,6 +1,6 @@
 /**
  * 离散事件模拟银行业务。用到队列，有序链表等结构
- * 注意：有序链表非降序排列
+ * 注意:有序链表非降序排列
  */
 #include<stdio.h>
 #include<stdlib.h>
@@ -47,7 +47,7 @@ typedef struct Queue
 PQ InitQueue();
 bool QueueIsEmpty(PQ q);
 void EnQueue(PQ q,QElemtype data);
-PQNode DeQueue(PQ q);
+QElemtype DeQueue(PQ q);
 
 
 
@@ -143,7 +143,68 @@ void InsertOrderLinkedList(PO po, OElemType e,int(*compare)(OElemType,OElemType)
         po->tail = r;
     }
 }
-PQ InitQueue();
-bool QueueIsEmpty(PQ q);
-void EnQueue(PQ q,QElemtype data);
-PQNode DeQueue(PQ q);
+PQ InitQueue()
+{
+    PQ q = (PQ)malloc(sizeof(Q));
+    if(!q)
+    {
+        printf("Dynamic malloc failed.\n");
+        exit(-1);
+    }
+    else
+    {
+        q->front = q->rear = (PQNode)malloc(sizeof(QNode));
+        if(!q->front)
+        {
+            printf("Dynamic malloc failed.\n");
+            exit(-1);
+        }
+        else
+        {
+            q->front->Next = NULL;
+        }
+    }
+    return q;
+}
+bool QueueIsEmpty(PQ q)
+{
+    if(q->front == q->rear)
+        return true;
+    else
+        return false;
+}
+void EnQueue(PQ q,QElemtype val)
+{
+    if(!q)
+    {
+        printf("Arguments is NULL.\n");
+    }
+    else
+    {
+        PQNode p = (PQNode)malloc(sizeof(QNode));
+        if(!p)
+        {
+            printf("Dynamic malloc failed.\n");
+            exit(-1);
+        }
+        else
+        {
+            p->data = val;
+            p->Next = NULL;
+        }
+        q->rear->Next = p;
+        q->rear = p;
+    }
+}
+QElemtype DeQueue(PQ q)
+{
+    PQNode p = q->front->Next;
+    QElemtype t = p->data;
+    q->front->Next = p->Next;
+    if(q->rear == p)
+    {
+        q->rear = q->front;
+    }
+    free(p);
+    return t;
+}
