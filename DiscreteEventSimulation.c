@@ -1,6 +1,6 @@
 /**
  * 离散事件模拟银行业务。用到队列，有序链表等结构
- * 注意:有序链表非降序排列
+ * 注意有序链表非降序排列
  */
 #include<stdio.h>
 #include<stdlib.h>
@@ -28,7 +28,7 @@ bool OrderLinkedListIsEmpty(PO po);
 void InsertOrderLinkedList(PO po,OElemType e,int(*compare)(OElemType,OElemType));
 PONode DeleteOrderLinkedListFirstNode(PO po);
 
-//33~51行是队列的表示及基本方法
+//32~50行是队列的表示及基本方法
 typedef struct QElemtype
 {
     int occurTime;//银行客户到达时间，即发生业务的时间
@@ -49,7 +49,10 @@ bool QueueIsEmpty(PQ q);
 void EnQueue(PQ q,QElemtype data);
 QElemtype DeQueue(PQ q);
 
-
+void openForDay()
+{
+    
+}
 
 
 int main()
