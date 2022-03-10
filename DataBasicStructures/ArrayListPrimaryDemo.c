@@ -25,7 +25,7 @@ int main()
 PA ConstructArrayList(int len)
 {
     int val = 0;
-    PA PArr = (PA)malloc(sizeof(PA)*len);
+    PA PArr = (PA)malloc(sizeof(A)*len);
     if (NULL == PArr)
     {
         printf("Dynamic memory allocation failed.\n");
