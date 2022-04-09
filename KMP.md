@@ -82,8 +82,7 @@ void get_next(char*patten,int*next)
 
 ```c
 /**
- * patten 为模式串，next为next数组   
- * next先存取模式串的位移距离(最长公共前后缀)，之后整体向后移动1位，并将第一位置-1，即可得到位移下标next数组。
+ * patten 为模式串，next为next数组,next_val为next修正后的数组  
  */
 void get_nextVal(char*patten,int*next，int* next_val)
 {
@@ -103,12 +102,11 @@ void get_nextVal(char*patten,int*next，int* next_val)
             i++;
         }
         else
-            j=next_val[j];
+            j=next_val[j];//
     }
 }
 ```
 ## KMP源代码
-测试用例：patten  -ababababcabaab              match    -ababcabaa
 ```c
 #include<stdio.h>
 #include<stdlib.h>
@@ -126,6 +124,8 @@ int main()
     get_next(match,next);
     KMP_Search(patten,match,next);
     return 0;
+    //测试用例：primaryString  -ababababcabaab              
+    //patten  -ababcabaa
 }
 void get_next(char*match,int*next)
 {
