@@ -10,21 +10,27 @@ Why do we need to correct the array next? You know not all cases require correct
 You know patten's initial index will influence the values of array named next and next_val.  
 So I divide it into two parts based on whether the patten's initial index is 0 or 1.**
 ## patten's initial index form 0
-![contents](https://github.com/MzjHarley/DataStructuresAndAlgorithms/blob/main/IMG/KMP/1.png)  
-**We will take 'ababcabaa' as an example.**
-LCPX is 'The longest common prefix and suffix'.
+![contents](https://github.com/MzjHarley/DataStructuresAndAlgorithms/blob/main/IMG/1.png)  
+**We will take 'ababcabaa' as an example.  
+LCPX is 'The longest common prefix and suffix'.**
+
 |patten|a|b|a|b|c|a|b|a|a|
 |---|---|---|---|---|---|---|---|---|---|
-|index|0|1|2|3|4|5|6|7|8|
+|index|**0**|1|2|3|4|5|6|7|8|
 |LCPX[i]|0|0|1|2|0|1|2|3|1|
 |next[i]|-1|0|0|1|2|0|1|2|3|
 |next_val[i]|-1|0|-1|0|2|-1|0|-1|3|
 ## patten's initial index form 1
-
-||a|b|a|b|c|a|b|a|a|
+![contents](https://github.com/MzjHarley/DataStructuresAndAlgorithms/blob/main/IMG/2.png)  
+**We still take 'ababcabaa' as an example.  
+LCPX is 'The longest common prefix and suffix'.**
+|patten|a|b|a|b|c|a|b|a|a|
 |---|---|---|---|---|---|---|---|---|---|
-|index|0|1|2|3|4|5|6|7|8|
-|LCPS|0|0|1|2|0|1|2|3|1|
-|next[i]|-1|0|0|1|2|0|1|2|3|
+|index|**1**|2|3|4|5|6|7|8|9|
+|LCPX[i]|0|0|1|2|0|1|2|3|1|
+|next[i]|0|1|1|2|3|1|2|3|4|
+|next_val[i]|0|1|0|1|3|0|1|0|4|
+
+
 
 
