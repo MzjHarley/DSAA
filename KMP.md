@@ -4,16 +4,22 @@
 |MZJ|3/8,2022|
 ---
 # KMP
-## 求模式串的next数组
-以ababcabaa为例
-|模式串|a|ab|aba|abab|ababc|ababca|ababcab|ababcaba|ababcabaa|
+**Today I will make a summary of String-Match algorithm KMP.  
+You know patten's initial index will influence the values of array named next and next_val.  
+So I divide it into two parts based on whether the patten's initial index is 0 or 1.**
+## patten's initial index form 0
+**We will take 'ababcabaa' as an example.**
+||a|b|a|b|c|a|b|a|a|
 |---|---|---|---|---|---|---|---|---|---|
-|最长公共前后缀|0|0|1|2|0|1|2|3|1|
+|index|0|1|2|3|4|5|6|7|8|
+|the longest common suffix|0|0|1|2|0|1|2|3|1|
+|next[i]|-1|0|0|1|2|0|1|2|3|
+## patten's initial index form 1
 
 ||a|b|a|b|c|a|b|a|a|
 |---|---|---|---|---|---|---|---|---|---|
-|下标i|0|1|2|3|4|5|6|7|8|
-|最长公共前后缀|0|0|1|2|0|1|2|3|1|
+|index|0|1|2|3|4|5|6|7|8|
+|LCPS|0|0|1|2|0|1|2|3|1|
 |next[i]|-1|0|0|1|2|0|1|2|3|
 ```c
 /**
