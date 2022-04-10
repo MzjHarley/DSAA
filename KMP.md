@@ -20,6 +20,57 @@ LCPX is 'The longest common prefix and suffix'.**
 |LCPX[i]|0|0|1|2|0|1|2|3|1|
 |next[i]|-1|0|0|1|2|0|1|2|3|
 |next_val[i]|-1|0|-1|0|2|-1|0|-1|3|
+
+```C
+void get_next(char*patten,int*next)
+{
+    int i = 0, j = -1;
+    next[0]=-1;
+    while(i<strlen(patten))
+        if(j==-1 || patten[i]==patten[j])
+            next[++i]=++j;
+        else
+            j= next[j];
+}
+
+void get_nextVal(char*patten,int*next,int* next_val)
+{
+    int i =  0, j = -1;
+    next_val[0] = -1;
+    while(i<strlen(patten))
+    {
+        if(j==-1|| patten[i]==patten[j])
+            next_val[i]=patten[++i]==patten[++j]?next_val[j]:j;
+        else
+            j=next_val[j];
+    }
+}
+
+void KMP_Search(char*primaryString,char*patten,int*next)
+{
+    int times = 0;//record appearence times of patten
+    int i = 0, j = 0;
+    while(i<strlen(primaryString))
+    {
+        if(j==-1 ||primaryString[i]==patten[j])
+        {
+            i++;
+            j++;
+        }
+        else
+            j=next[j];
+        if(j==strlen(patten))
+        {
+            times++;
+            printf("found at %d.\n",i-j);
+            j=next[j-1];
+            i--;
+        }
+    }
+    if(0==times)
+        printf("Not found.\n");
+}
+```
 ## patten's initial index form 1
 ![contents](https://github.com/MzjHarley/DataStructuresAndAlgorithms/blob/main/IMG/2.png)  
 **We still take 'ababcabaa' as an example.  
