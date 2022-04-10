@@ -82,6 +82,53 @@ LCPX is 'The longest common prefix and suffix'.**
 |next[i]|0|1|1|2|3|1|2|3|4|
 |next_val[i]|0|1|0|1|3|0|1|0|4|
 
+```c
+void get_next(char*patten,int*next)
+{
+    int i = 1, j = 0;
+    next[1]=0;
+    while(i<strlen(patten))
+        if(j==0 || patten[i]==patten[j])
+            next[++i]=++j;
+        else
+            j= next[j];
+}
 
+void get_nextVal(char*patten,int*next,int* next_val)
+{
+    int i =  1, j = 0;
+    next_val[1] = 0;
+    while(i<strlen(patten))
+    {
+        if(j==0|| patten[i]==patten[j])
+            next_val[i]=patten[++i]==patten[++j]?next_val[j]:j;
+        else
+            j=next_val[j];
+    }
+}
 
-
+void KMP_Search(char*primaryString,char*patten,int*next)
+{
+    int times = 0;//记录模式串出现的次数
+    int i = 1, j = 1;
+    while(i<strlen(primaryString))
+    {
+        if(j==0 ||primaryString[i]==patten[j])
+        {
+            i++;
+            j++;
+        }
+        else
+            j=next[j];
+        if(j==strlen(patten))
+        {
+            times++;
+            printf("found at %d.\n",i-j);
+            j=next[j-1];
+            i--;
+        }
+    }
+    if(0==times)
+        printf("Not found.\n");
+}
+```
