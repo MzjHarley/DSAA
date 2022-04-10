@@ -10,7 +10,7 @@ Why do we need to correct the array next? You know not all cases require correct
 You know patten's initial index will influence the values of array named next and next_val.  
 So I divide it into two parts based on whether the patten's initial index is 0 or 1.**
 ## patten's initial index form 0
-
+![contents](https://github.com/MzjHarley/DataStructuresAndAlgorithms/blob/main/IMG/KMP/1.png)  
 **We will take 'ababcabaa' as an example.**
 LCPX is 'The longest common prefix and suffix'.
 |patten|a|b|a|b|c|a|b|a|a|
