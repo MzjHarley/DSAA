@@ -1,5 +1,5 @@
 /**
- * ±¾³ÌĞòÓÃÓÚ´´½¨¹ş·òÂüÊ÷£¬²¢´òÓ¡³ö¹ş·òÂü±àÂë¡£
+ * æœ¬ç¨‹åºç”¨äºåˆ›å»ºå“ˆå¤«æ›¼æ ‘ï¼Œå¹¶æ‰“å°å‡ºå“ˆå¤«æ›¼ç¼–ç ã€‚
  */
 #include <iostream>
 #include<malloc.h>
@@ -24,7 +24,7 @@ int main()
 {
     HT ht;
     int n;
-    cout<<"ÇëÊäÈë¹ş·òÂüÊ÷Ò¶×Ó½Úµã¸öÊı:";
+    cout<<"è¯·è¾“å…¥å“ˆå¤«æ›¼æ ‘å¶å­èŠ‚ç‚¹ä¸ªæ•°:";
     cin>>n;
     createHuffman(ht,n);
     HuffmanCode(ht,n);
@@ -33,13 +33,13 @@ int main()
 
 void createHuffman(HT&ht,int n)
 {
-    ht=(HT)malloc(sizeof(H)*(n*2));//°üº¬n¸öÒ¶×Ó½Úµã(1~n)£¬n-1¸öĞÂÉú³ÉµÄ½Úµã(n+1~2n-1)£¬0ºÅ½Úµã²»Ê¹ÓÃ¡£
+    ht=(HT)malloc(sizeof(H)*(n*2));//åŒ…å«nä¸ªå¶å­èŠ‚ç‚¹(1~n)ï¼Œn-1ä¸ªæ–°ç”Ÿæˆçš„èŠ‚ç‚¹(n+1~2n-1)ï¼Œ0å·èŠ‚ç‚¹ä¸ä½¿ç”¨ã€‚
     if(!ht)
         exit(-1);
     int weight,S1,S2;
     char ch;
-    cout<<"ÇëÒÀ´ÎÎªÃ¿¸öÒ¶×Ó½Úµã¸³ÖµºÍÈ¨:(×Ö·û È¨Öµ)"<<endl;
-    for(int i=1; i<=n; i++)//ÎªÒ¶×Ó½Úµã¸³È¨²¢³õÊ¼»¯
+    cout<<"è¯·ä¾æ¬¡ä¸ºæ¯ä¸ªå¶å­èŠ‚ç‚¹èµ‹å€¼å’Œæƒ:(å­—ç¬¦ æƒå€¼)"<<endl;
+    for(int i=1; i<=n; i++)//ä¸ºå¶å­èŠ‚ç‚¹èµ‹æƒå¹¶åˆå§‹åŒ–
     {
         cin>>ch;
         cin>>weight;
@@ -47,12 +47,12 @@ void createHuffman(HT&ht,int n)
         ht[i].ch=ch;
         ht[i].parent=ht[i].rc=ht[i].lc=0;
     }
-    for(int i=n+1; i<2*n; i++)//Ö´ĞĞn-1´ÎºÏ²¢´´½¨n-1¸öĞÂµÄ½Úµã£¬Ã¿´ÎÌôÑ¡³öÈ¨Öµ×îĞ¡µÄÁ½¸ö½ÚµãºÏ²¢Éú³ÉĞÂ½Úµã£¬²¢ÓÃĞÂ½Úµã´úÌæÕâÁ½¸ö½Úµã¡£
+    for(int i=n+1; i<2*n; i++)//æ‰§è¡Œn-1æ¬¡åˆå¹¶åˆ›å»ºn-1ä¸ªæ–°çš„èŠ‚ç‚¹ï¼Œæ¯æ¬¡æŒ‘é€‰å‡ºæƒå€¼æœ€å°çš„ä¸¤ä¸ªèŠ‚ç‚¹åˆå¹¶ç”Ÿæˆæ–°èŠ‚ç‚¹ï¼Œå¹¶ç”¨æ–°èŠ‚ç‚¹ä»£æ›¿è¿™ä¸¤ä¸ªèŠ‚ç‚¹ã€‚
     {
-        S1=findMin(ht,i-1),S2=findMin(ht,i-1);//ÌôÑ¡
-        ht[S1].parent=ht[S2].parent=i;//¶ÔÌôÑ¡³öµÄÁ½¸ö½Úµã½øĞĞ´¦Àí
-        ht[i].weight=ht[S1].weight+ht[S2].weight;//¸³È¨
-        ht[i].parent=0,ht[i].lc=S1,ht[i].rc=S2;//³õÊ¼»¯
+        S1=findMin(ht,i-1),S2=findMin(ht,i-1);//æŒ‘é€‰
+        ht[S1].parent=ht[S2].parent=i;//å¯¹æŒ‘é€‰å‡ºçš„ä¸¤ä¸ªèŠ‚ç‚¹è¿›è¡Œå¤„ç†
+        ht[i].weight=ht[S1].weight+ht[S2].weight;//èµ‹æƒ
+        ht[i].parent=0,ht[i].lc=S1,ht[i].rc=S2;//åˆå§‹åŒ–
     }
 }
 
@@ -62,26 +62,26 @@ int findMin(HT&ht,int n)
     for(int i=1; i<=n; i++)
         if(ht[i].weight<minElem && ht[i].parent==0)
             minElem=ht[i].weight,s=i;
-    ht[s].parent=1;//ÕâÀïÕÒµ½×îĞ¡µÄÈ¨ºó£¬¾İÅĞ¶ÏÌõ¼şÉ¾³ı¸Ã½Úµã   
+    ht[s].parent=1;//è¿™é‡Œæ‰¾åˆ°æœ€å°çš„æƒåï¼Œæ®åˆ¤æ–­æ¡ä»¶åˆ é™¤è¯¥èŠ‚ç‚¹   
     return s;
 }
 
 void HuffmanCode(HT ht,int n)
 {
-    string hc[n+1];//×Ö·û´®Êı×é±£´æÃ¿¸öÒ¶×Ó½ÚµãµÄ¹ş·òÂü±àÂë¡£
+    string hc[n+1];//å­—ç¬¦ä¸²æ•°ç»„ä¿å­˜æ¯ä¸ªå¶å­èŠ‚ç‚¹çš„å“ˆå¤«æ›¼ç¼–ç ã€‚
     if(!hc)
         exit(-1);
-    for(int i=1;i<=n;i++)//ÕâÀï´ú±íÃ¿¸öÒ¶×Ó½Úµã
+    for(int i=1;i<=n;i++)//è¿™é‡Œä»£è¡¨æ¯ä¸ªå¶å­èŠ‚ç‚¹
     {
         string cd;
-        for(int j=i,f=ht[j].parent;f!=0;j=f,f=ht[f].parent)//´ÓÃ¿¸öÒ¶×Ó½Úµã»ØËİ£¬Ò»Ö±µ½ÆäË«Ç×Îª0½áÊø£¬×ó0ÓÒ1
+        for(int j=i,f=ht[j].parent;f!=0;j=f,f=ht[f].parent)//ä»æ¯ä¸ªå¶å­èŠ‚ç‚¹å›æº¯ï¼Œä¸€ç›´åˆ°å…¶åŒäº²ä¸º0ç»“æŸï¼Œå·¦0å³1
         {
             if(ht[f].lc==j)
                 cd+='0';
             else if(ht[f].rc==j)
                 cd+='1';
         }
-        //½«cd×Ö·û´®µßµ¹¸³¸øhc
+        //å°†cdå­—ç¬¦ä¸²é¢ å€’èµ‹ç»™hc
         reverse(cd.begin(),cd.end());
         hc[i]=cd;        
         cout<<ht[i].ch<<":";
