@@ -32,7 +32,7 @@ void print(int* a,int len)
 }
 void selectSort(int*a,int len)
 {
-    for (int  i = 0; i < len-1; i++)//len-1 times traverse,every traverse select a minNumber.
+    for (int  i = 0; i < len-1; i++)//len-1 times traverse,every traverse get a minNumber.
     {
         int minpos=i;
         for (int j = i+1; j < len; j++)
