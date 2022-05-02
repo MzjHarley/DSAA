@@ -7,7 +7,7 @@ using namespace std;
 
 void Random(int* a,int len);
 void singlePivotQuickSort(int*a,int begin,int end);
-void partition(int*a,int pivot,int &leftptr,int&rightptr);
+void partition(int*a,int pivot,int &leftptr,int rightptr);
 void print(int* a,int len);
 
 int main()
@@ -43,7 +43,7 @@ void singlePivotQuickSort(int*a,int begin,int end)
     singlePivotQuickSort(a,begin,leftptr-1);
     singlePivotQuickSort(a,leftptr+1,end);
 }
-void partition(int*a,int pivot,int& leftptr,int& rightptr)
+void partition(int*a,int pivot,int& leftptr,int rightptr)
 {
     int right = rightptr+1;//right is pivot's index.
     while(leftptr<=rightptr)
