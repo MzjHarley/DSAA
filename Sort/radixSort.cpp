@@ -1,3 +1,6 @@
+/**
+ * Count sorting is a non-comparative sort, using the technique of ordering the array subscript, which is a kind of bucket idea; 
+ */
 #include<iostream>
 #include<cstdlib>
 #include<ctime>
