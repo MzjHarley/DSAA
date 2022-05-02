@@ -27,7 +27,7 @@ void Random(int* a,int len)
 {
     srand(time(0));//set time seed
     for (int i = 0; i < len; i++)
-        a[i]=rand()%30+1;//1~100
+        a[i]=rand()%100+1;//1~100
 }
 void print(int* a,int len)
 {
@@ -42,5 +42,5 @@ void countSort(int*a,int len)
     for(int i=0;i<len;i++) count[a[i]-min]++;//count the number's occurence.
     for(int i=1;i<max-min+1;i++) count[i]+=count[i-1];//accumulate the count array to get number's position (from 1).
     for(int i=len-1;i>=0;i--) {int& pos=count[a[i]-min]; temp[--pos]=a[i];} //reverse operation to ensure the array stablity.
-    memcpy(a,temp,len*sizeof(int));//void *memcpy(void *__restrict__ _Dst, const void *__restrict__ _Src, size_t _MaxCount),array copy.
+    memcpy(a,temp,sizeof(temp));//void *memcpy(void *__restrict__ _Dst, const void *__restrict__ _Src, size_t _MaxCount),array copy.
 }
