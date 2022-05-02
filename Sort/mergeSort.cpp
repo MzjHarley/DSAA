@@ -14,7 +14,7 @@ int main()
 {
     int a[ARR_SIZE];
     Random(a,ARR_SIZE);
-    mergeSort(a,0,ARR_SIZE);
+    mergeSort(a,0,ARR_SIZE-1);
     print(a,ARR_SIZE);
     return 0;
 }
