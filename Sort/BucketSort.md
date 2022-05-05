@@ -31,3 +31,54 @@ Suppose to sort the array named "arr".
 
 The gap between elements in the same bucket is up to gap-1;  
 The formula (arr[i]-min)/gap determines which bucket the array elements are placed in.
+```c++
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+#include<algorithm>
+#include<vector>
+
+using namespace std;
+#define ARR_SIZE 100
+
+void Random(int* a,int len);
+void bucketSort(int*a,int len);
+void print(int* a,int len);
+
+int main()
+{
+    int a[ARR_SIZE];
+    Random(a,ARR_SIZE);
+    bucketSort(a,ARR_SIZE);
+    print(a,ARR_SIZE);
+    return 0;
+}
+void Random(int* a,int len)
+{
+    srand(time(0));//set time seed
+    for (int i = 0; i < len; i++)
+        a[i]=rand()%100+1;//1~100
+}
+void print(int* a,int len)
+{
+    for (int i = 0; i < len; i++)
+        cout<<a[i]<<" ";
+    cout<<endl;
+}
+void bucketSort(int*a,int len)
+{
+    int max=*max_element(a,a+len);
+    int min=*min_element(a,a+len);
+    int gap=(max-min)/len+1;//bucket's gap.
+    int bucketNum=(max-min)/gap+1;//bucket's num
+    vector <vector<int>> B(bucketNum);
+    for(int i=0;i<len;i++)
+        B[(a[i]-min)/gap].push_back(a[i]);// append every element to corresponding(相应的) bucket.
+    for(int i=0;i<bucketNum;i++)
+        sort(B[i].begin(),B[i].end());// sort every bucket internally,here we call c++ inner function sort(),
+    int i=0;
+    for(int j=0;j<bucketNum;j++)
+        for(int k=0;k<B[j].size();k++)
+            a[i++]=B[j][k];
+}
+```
